@@ -27,11 +27,12 @@
 	<string name="change_user">Benutzer wechseln</string>
 	<string name="choose_user">Benutzer auswählen</string>
 	<string name="create_user">Benutzer erstellen</string>
-	<string name="action_create_user">Benutzer erstellen...</string>
+	<string name="action_create_user">Benutzer erstellen&#8230;</string>
 	<string name="choose_locale">Sprache auswählen</string>
 	<string name="de">Deutsch</string>
 	<string name="en">Englisch</string>
 	<string name="restart">Bitte starten Sie die Applikation neu</string>
+	<string name="hint_editText">Schreib Etwas</string>
 	
 	<string name="ok">OK</string>
 	<string name="cancle">Abbrechen</string>

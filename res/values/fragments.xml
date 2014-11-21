@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- This Resource File is for the Fragment Configuration of the Application. -->
 <resources>
+
     <!-- Here must be all Fragments which should appear in the Navigation Drawer. -->
-    <string-array
-        name="fragments">
+    <string-array name="fragments">
         <item>at.halbarth.alexander.adaptiveui.fragments.ExamplePic</item>
-    	<item>at.halbarth.alexander.adaptiveui.fragments.ExampleTxt</item>
-    	<item>at.halbarth.alexander.adaptiveui.fragments.LinksWIFI</item>
-    	<item>at.halbarth.alexander.adaptiveui.fragments.ChangeLocale</item>
-   		<item>at.halbarth.alexander.adaptiveui.fragments.ExampleEditTxt</item>
+        <item>at.halbarth.alexander.adaptiveui.fragments.ExampleTxt</item>
+        <item>at.halbarth.alexander.adaptiveui.fragments.LinksWIFI</item>
+        <item>at.halbarth.alexander.adaptiveui.fragments.ChangeLocale</item>
+        <item>at.halbarth.alexander.adaptiveui.fragments.ExampleEditTxt</item>
     </string-array>
     <!-- For every Fragment above must be a Name. -->
-    <string-array
-        name="fragment_names">
-    	<item>@string/title_section1</item>
-   		<item>@string/title_section2</item>
-   		<item>@string/title_section3</item>
-   		<item>@string/title_section4</item>
-   		<item>@string/title_section5</item>
+    <string-array name="fragment_names">
+        <item>@string/title_section1</item>
+        <item>@string/title_section2</item>
+        <item>@string/title_section3</item>
+        <item>@string/title_section4</item>
+        <item>@string/title_section5</item>
     </string-array>
+
 </resources>

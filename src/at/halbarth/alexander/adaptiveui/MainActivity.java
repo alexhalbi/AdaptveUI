@@ -32,11 +32,8 @@ public class MainActivity extends ActionBarActivity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
 
 	private static final String USERS = "userList";
-
 	private static final String USERLOGGEDIN = "userLoggedIn";
-
 	private static final String FAVORITEMAP = "favoriteMap";
-
 	private static final String DEF_STRING_ERR = "DEF_STRING_ERR";
 
 	/**
@@ -50,10 +47,9 @@ public class MainActivity extends ActionBarActivity implements
 	 * {@link #restoreActionBar()}.
 	 */
 	private CharSequence mTitle;
-	// TODO Add user?
+
 	private String[] users;
 	private int userLoggedIn;
-
 	private FavoriteMap favoriteMap;
 
 	@Override
@@ -61,6 +57,18 @@ public class MainActivity extends ActionBarActivity implements
 		super.onCreate(savedInstanceState);
 		SharedPreferences settings = PreferenceManager
 				.getDefaultSharedPreferences(this);
+		
+		Configuration config = getBaseContext().getResources()
+				.getConfiguration();
+		String lang = settings.getString(getString(R.string.pref_locale), "");
+		if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
+			locale = new Locale(lang);
+			Locale.setDefault(locale);
+			config.locale = locale;
+			getBaseContext().getResources().updateConfiguration(config,
+					getBaseContext().getResources().getDisplayMetrics());
+		}
+		
 		loadUsers();
 
 		try {
@@ -85,34 +93,21 @@ public class MainActivity extends ActionBarActivity implements
 
 		createNavigationDrawer();
 
-		Configuration config = getBaseContext().getResources()
-				.getConfiguration();
-
-		String lang = settings.getString(getString(R.string.pref_locale), "");
-		if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
-			locale = new Locale(lang);
-			Locale.setDefault(locale);
-			config.locale = locale;
-			getBaseContext().getResources()
-				.updateConfiguration(config,
-					getBaseContext().getResources().getDisplayMetrics());
-		}
-
 		mNavigationDrawerFragment.updateElements(favoriteMap
 				.getSortedNames(users[userLoggedIn]));
 	}
 
-	@SuppressLint("NewApi") 
+	@SuppressLint("NewApi")
 	private void loadUsers() {
 		SharedPreferences settings = PreferenceManager
 				.getDefaultSharedPreferences(this);
 		userLoggedIn = settings.getInt(USERLOGGEDIN, 0);
-		
+
 		String s = settings.getString(USERS, DEF_STRING_ERR);
-		if(s == null || s.trim().equalsIgnoreCase("")|| s.isEmpty())
+		if (s == null || s.trim().equalsIgnoreCase("") || s.isEmpty())
 			s = DEF_STRING_ERR;
-		
-		if(!s.equals(DEF_STRING_ERR)) {
+
+		if (!s.equals(DEF_STRING_ERR)) {
 			users = s.split(",");
 		} else {
 			Log.d("loadUsers", "loading Default Users");
@@ -134,8 +129,6 @@ public class MainActivity extends ActionBarActivity implements
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
-
-		loadUsers();
 	}
 
 	@Override
@@ -163,19 +156,19 @@ public class MainActivity extends ActionBarActivity implements
 	}
 
 	public void changeUser() {
-		String[] u = new String[users.length+1];
-        for(int i = 0; i < users.length;i++) {
-        	u[i] = users[i];
-        }
-        u[users.length] = getString(R.string.action_create_user);
-		
+		String[] u = new String[users.length + 1];
+		for (int i = 0; i < users.length; i++) {
+			u[i] = users[i];
+		}
+		u[users.length] = getString(R.string.action_create_user);
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.choose_user);
 		builder.setItems(u, new DialogInterface.OnClickListener() {
 			@SuppressLint("NewApi")
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
-				if(id==users.length) {
+				if (id == users.length) {
 					newUser();
 				} else {
 					changeUser(id);
@@ -184,36 +177,39 @@ public class MainActivity extends ActionBarActivity implements
 		});
 		builder.show();
 	}
-	
-	@SuppressLint("NewApi") 
+
+	@SuppressLint("NewApi")
 	public void changeUser(int userId) {
 		userLoggedIn = userId;
 		invalidateOptionsMenu();
 		onNavigationDrawerItemSelected(0);
 	}
-	
+
 	public void newUser() {
 		final EditText input = new EditText(this);
-		
+
 		new AlertDialog.Builder(this)
-	    .setTitle(R.string.create_user)
-	    .setView(input)
-	    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int whichButton) {
-	            String[] u = new String[users.length+1];
-	            for(int i = 0; i < users.length;i++) {
-	            	u[i] = users[i];
-	            }
-	            u[users.length] = input.getText().toString();
-	            users = u;
-	            saveUsers();
-	            changeUser(users.length-1);
-	        }
-	    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int whichButton) {
-	            // Do nothing.
-	        }
-	    }).show();
+				.setTitle(R.string.create_user)
+				.setView(input)
+				.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						String[] u = new String[users.length + 1];
+						for (int i = 0; i < users.length; i++) {
+							u[i] = users[i];
+						}
+						u[users.length] = input.getText().toString();
+						users = u;
+						saveUsers();
+						changeUser(users.length - 1);
+					}
+				})
+				.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								// Do nothing.
+							}
+						}).show();
 	}
 
 	@Override
@@ -343,13 +339,13 @@ public class MainActivity extends ActionBarActivity implements
 				.getDefaultSharedPreferences(this);
 		Editor e = settings.edit();
 		e.putInt(USERLOGGEDIN, userLoggedIn);
-		
+
 		StringBuilder sb = new StringBuilder();
-		for (String u:users) {
-		    sb.append(u).append(",");
+		for (String u : users) {
+			sb.append(u).append(",");
 		}
 		e.putString(USERS, sb.toString());
-		
+
 		e.commit();
 	}
 
