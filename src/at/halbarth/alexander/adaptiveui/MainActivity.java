@@ -51,6 +51,7 @@ public class MainActivity extends ActionBarActivity implements
 	private String[] users;
 	private int userLoggedIn;
 	private FavoriteMap favoriteMap;
+	private Locale locale = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -95,31 +96,6 @@ public class MainActivity extends ActionBarActivity implements
 
 		mNavigationDrawerFragment.updateElements(favoriteMap
 				.getSortedNames(users[userLoggedIn]));
-	}
-
-	@SuppressLint("NewApi")
-	private void loadUsers() {
-		SharedPreferences settings = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		userLoggedIn = settings.getInt(USERLOGGEDIN, 0);
-
-		String s = settings.getString(USERS, DEF_STRING_ERR);
-		if (s == null || s.trim().equalsIgnoreCase("") || s.isEmpty())
-			s = DEF_STRING_ERR;
-
-		if (!s.equals(DEF_STRING_ERR)) {
-			users = s.split(",");
-		} else {
-			Log.d("loadUsers", "loading Default Users");
-			users = getResources().getStringArray(R.array.default_user_array);
-		}
-	}
-
-	@Override
-	protected void onPause() {
-		saveFavoriteMap(favoriteMap);
-		saveUsers();
-		super.onPause();
 	}
 
 	public void createNavigationDrawer() {
@@ -244,15 +220,11 @@ public class MainActivity extends ActionBarActivity implements
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		} else if (id == R.id.change_user) {
+		if (id == R.id.change_user) {
 			changeUser();
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-	private Locale locale = null;
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
@@ -348,11 +320,36 @@ public class MainActivity extends ActionBarActivity implements
 
 		e.commit();
 	}
+	
+	@SuppressLint("NewApi")
+	private void loadUsers() {
+		SharedPreferences settings = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		userLoggedIn = settings.getInt(USERLOGGEDIN, 0);
+
+		String s = settings.getString(USERS, DEF_STRING_ERR);
+		if (s == null || s.trim().equalsIgnoreCase("") || s.isEmpty())
+			s = DEF_STRING_ERR;
+
+		if (!s.equals(DEF_STRING_ERR)) {
+			users = s.split(",");
+		} else {
+			Log.d("loadUsers", "loading Default Users");
+			users = getResources().getStringArray(R.array.default_user_array);
+		}
+	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		saveFavoriteMap(favoriteMap);
 		saveUsers();
 		super.onSaveInstanceState(outState);
+	}
+	
+	@Override
+	protected void onPause() {
+		saveFavoriteMap(favoriteMap);
+		saveUsers();
+		super.onPause();
 	}
 }
