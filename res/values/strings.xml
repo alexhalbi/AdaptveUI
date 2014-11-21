@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AdaptiveUI Halbarth EN</string>
+    <string name="title_section1">Picture Example</string>
+    <string name="title_section2">Example Text</string>
+    <string name="title_section3">Links</string>
+    <string name="title_section4">Change Language</string>
+    <string name="title_section5">Example Textfield</string>
+    
+    <string name="title_pic">Picture Example</string>
+    <string name="title_txt">Example Text</string>
+    <string name="title_links">Links</string>
+    <string name="title_change_lang">Change Language</string>
+    <string name="title_edit_txt">Example Textfield</string>
+    
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="example_picture_description">Example Picture</string>
+    <string name="example_text">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia live the blind texts. Separated they live in Bookmarksgrove on the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country in which roasted parts of sentences fly into your mouth. Not even the all-powerful Pointing the blind texts dominated - an almost unorthographic life. One day however a small line of blind text by the name of Lorem Ipsum, to go out into the far World of Grammar. The big Oxmox advised her it from, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text did not listen. She packed her seven capitals, put her initial into the belt and made herself on the way. When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Wistful ran him a rhetorical question on the cheek, then continued on his way. On the way she met a copy. The copy warned the Little Blind Text, where it would herkäme been rewritten a thousand times and everything that was left from its origin, is the word "and" and the Little Blind Text should turn around and return to its own, safe country. But it did not convince Gutzureden everything and so it was not long until he lay in wait for a few insidious Copy Writers, made her drunk with Longe and Parole and dragged her into their agency, where they abused again and again for their projects. And if it has not been rewritten, then you are still using it.</string>
+	<string name="link_1">Google</string>
+	<string name="link_2">Amazon</string>
+	<string name="link_3">Spengergasse</string>
+	<string name="enable_wifi">Please enable WIFI</string>
+	<string name="curr_user">Displays the current User</string>
+	<string name="change_user">Change User</string>
+	<string name="choose_user">Coose User</string>
+	<string name="choose_locale">Coose Locale</string>
+	<string name="pref_locale">locale</string>
+	<string name="de">German</string>
+	<string name="en">English</string>
+	<string name="restart">Please Restart Application</string>
+	
+</resources>

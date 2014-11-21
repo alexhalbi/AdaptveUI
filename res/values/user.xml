@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array
+        name="user_array">
+    	<item>Red</item>
+   		<item>Green</item>
+    	<item>Blue</item>
+    </string-array>
+</resources>
