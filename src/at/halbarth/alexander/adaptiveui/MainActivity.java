@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -41,7 +42,6 @@ public class MainActivity extends ActionBarActivity
     private CharSequence mTitle;
     //TODO Add user?
     private String[] users;
-    //TODO save curr logged in user! to sharedpref
     private int userLoggedIn; 
     
     private FavoriteMap favoriteMap;
@@ -57,12 +57,12 @@ public class MainActivity extends ActionBarActivity
         	favoriteMap = getFavoriteMap();
         } catch(Exception e) {
         	Log.e("FavoriteMap","New",e);
-        	favoriteMap = new FavoriteMap();
+        	favoriteMap = new FavoriteMap(getResources().getStringArray(R.array.fragments));
         }
         
         if(favoriteMap==null) {
         	Log.d("FavoriteMap","New");
-        	favoriteMap = new FavoriteMap();
+        	favoriteMap = new FavoriteMap(getResources().getStringArray(R.array.fragments));
         }
         
         fragmntNameMap = new FragmentNameMap(getApplicationContext(), favoriteMap);
@@ -88,13 +88,15 @@ public class MainActivity extends ActionBarActivity
     }
 	
 	private void loadUsers() {
-        userLoggedIn = 1;
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        userLoggedIn = settings.getInt("userLoggedIn", 0);
         users = getResources().getStringArray(R.array.user_array);
 	}
 	
 	@Override
 	protected void onPause() {
 		saveFavoriteMap(favoriteMap);
+		saveUserLoggedIn();
 		super.onPause();
 	}
 
@@ -271,10 +273,17 @@ public class MainActivity extends ActionBarActivity
     	   }
     	 return favoriteMap;
     }
-
+    
+    private void saveUserLoggedIn() {
+    	SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+    	Editor e = settings.edit();
+    	e.putInt("userLoggedIn", userLoggedIn);
+    	e.commit();
+    }
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		saveFavoriteMap(favoriteMap);
+		saveUserLoggedIn();
 		super.onSaveInstanceState(outState);
 	}
 }

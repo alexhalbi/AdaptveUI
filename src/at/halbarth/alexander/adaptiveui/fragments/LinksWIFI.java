@@ -1,4 +1,4 @@
-package at.halbarth.alexander.adaptiveui.elements;
+package at.halbarth.alexander.adaptiveui.fragments;
 
 import java.util.Locale;
 
