@@ -26,10 +26,15 @@
 	<string name="curr_user">Displays the current User</string>
 	<string name="change_user">Change User</string>
 	<string name="choose_user">Coose User</string>
+	<string name="create_user">Create User</string>
+	<string name="action_create_user">Create User...</string>
 	<string name="choose_locale">Coose Locale</string>
 	<string name="pref_locale">locale</string>
 	<string name="de">German</string>
 	<string name="en">English</string>
 	<string name="restart">Please Restart Application</string>
+	
+	<string name="ok">OK</string>
+	<string name="cancle">Cancle</string>
 	
 </resources>

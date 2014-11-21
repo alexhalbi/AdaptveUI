@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- This Resource File is for the Default Users of the Application.
+If SharedPref cannot be read this UserList will be used instead. -->
 <resources>
     <string-array
-        name="user_array">
+        name="default_user_array">
     	<item>Red</item>
    		<item>Green</item>
     	<item>Blue</item>

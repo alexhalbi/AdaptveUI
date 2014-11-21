@@ -1,6 +1,7 @@
 package at.halbarth.alexander.adaptiveui;
 
 import java.io.Serializable;
+import java.security.InvalidParameterException;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,11 +13,12 @@ import android.util.Log;
 
 @SuppressWarnings("rawtypes")
 public class FavoriteMap implements Serializable {
-	private static final long serialVersionUID = -6974625372446467298L;
+	private static final long serialVersionUID = -8423069670771879104L;
 	private Map<String, Map<Class, Integer>> user;
+	private Map<Class,String> names;
 	private Class[] fragments;
 	
-	public FavoriteMap(String[] fragments) {
+	public FavoriteMap(String[] fragments, String[] fragmentNames) {
 		this.fragments = new Class[fragments.length];
 		for(int i = 0; i<fragments.length;i++) {
 			try {
@@ -25,14 +27,25 @@ public class FavoriteMap implements Serializable {
 				Log.e("FragmentMap", "Fragment " + fragments[i] +" not found, skipped", e);
 			}
 		}
+		names = new HashMap<Class, String>();
+		updateNames(fragments, fragmentNames);
+	}
+	
+	public void updateNames(String[] fragments, String[] fragmentNames) {
+		if(fragments.length!=fragmentNames.length) {
+			throw new InvalidParameterException("Resource Name and Fragment Length do not match!");
+		}
+		for(int i = 0; i<fragments.length;i++) {
+			try {
+				this.names.put(Class.forName(fragments[i]), fragmentNames[i]);
+			} catch (ClassNotFoundException e) {
+				Log.e("FragmentNameMap", "Fragment " + fragments[i] + " not found, skipped", e);
+			}
+		}
 	}
 
 	public Fragment getPosition(String user, int position) {
 		return getPosition(user, position, true);
-	}
-
-	public Fragment getPositionNoIncr(String user, int position) {
-		return getPosition(user, position, false);
 	}
 
 	private Fragment getPosition(String user, int position, boolean incr) {
@@ -88,6 +101,23 @@ public class FavoriteMap implements Serializable {
 			count++;
 		}
 		return null;
+	}
+	
+	
+	public String getNameFrgmt(Fragment frgmnt) {
+		return names.get(frgmnt.getClass());
+	}
+	
+	public String getNamePos(String user, int position) {
+		return getNameFrgmt(getPosition(user, position,false));
+	}
+	
+	public String[] getSortedNames(String user) {
+		String[] list = new String[names.size()];
+		for(int i = 0;list.length>i;i++) {
+			list[i] = getNamePos(user, i);
+		}
+		return list;
 	}
 }
 

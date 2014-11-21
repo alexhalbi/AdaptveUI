@@ -26,9 +26,13 @@
 	<string name="curr_user">Zeigt den derzeitigen Benutzer an</string>
 	<string name="change_user">Benutzer wechseln</string>
 	<string name="choose_user">Benutzer auswählen</string>
+	<string name="create_user">Benutzer erstellen</string>
+	<string name="action_create_user">Benutzer erstellen...</string>
 	<string name="choose_locale">Sprache auswählen</string>
 	<string name="de">Deutsch</string>
 	<string name="en">Englisch</string>
 	<string name="restart">Bitte starten Sie die Applikation neu</string>
 	
+	<string name="ok">OK</string>
+	<string name="cancle">Abbrechen</string>
 </resources>
