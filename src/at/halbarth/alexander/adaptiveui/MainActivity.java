@@ -96,6 +96,8 @@ public class MainActivity extends ActionBarActivity implements
 
 		mNavigationDrawerFragment.updateElements(favoriteMap
 				.getSortedNames(users[userLoggedIn]));
+		
+		changeUser(userLoggedIn);
 	}
 
 	public void createNavigationDrawer() {
@@ -118,6 +120,7 @@ public class MainActivity extends ActionBarActivity implements
 		if (mNavigationDrawerFragment != null)
 			mNavigationDrawerFragment.updateElements(favoriteMap
 					.getSortedNames(users[userLoggedIn]));
+		onSectionAttached(position);
 	}
 
 	public void onSectionAttached(int number) {
